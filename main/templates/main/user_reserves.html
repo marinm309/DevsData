@@ -1,0 +1,29 @@
+{% include 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<main>
+    <ul>
+        <ul class="single-event-row top-row">
+            <li>THUMBNAIL</li>
+            <li>EVENT</li>
+            <li>START DATE</li>
+            <li>END DATE</li>
+            <li>RESERVE</li>
+        </ul>
+        {% for event in events %}
+            <ul class="single-event-row">
+                <li><img src="{{event.thumbnail.url}}" alt=""></li>
+                <li>{{event.title}}</li>
+                <li>{{event.start_date}}</li>
+                <li>{{event.end_date}}</li>
+                
+                <li><a style="color: red;" href="{% url 'reserve' event.id %}">Cancel</a></li>
+            </ul>
+        {% endfor %}
+    </ul>
+</main>
+
+{% endblock content %}

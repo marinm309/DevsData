@@ -1,0 +1,33 @@
+{% include 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <main>
+        <ul>
+            <ul class="single-event-row top-row">
+                <li>THUMBNAIL</li>
+                <li>EVENT</li>
+                <li>START DATE</li>
+                <li>END DATE</li>
+                <li>RESERVE</li>
+            </ul>
+            {% for event in events %}
+                <ul class="single-event-row">
+                    <li><img src="{{event.thumbnail.url}}" alt=""></li>
+                    <li>{{event.title}}</li>
+                    <li>{{event.start_date}}</li>
+                    <li>{{event.end_date}}</li>
+                    
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'reserve' event.id %}">Reserve</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </main>
+
+{% endblock content %}
